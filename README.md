@@ -17,7 +17,7 @@ It is compatible with the Raspberry Pi 1, 2, 3, Zero.
 
 ![](doc/vfd_display.jpg)
 
-PiFmAdv has been developed solely for experimentation purposes only. It is not a media center, not is it intended to broadcast music to your stereo system. See the [legal warning](#warning-and-disclaimer).
+PiFmAdv has been developed solely for experimentation purposes only. It is not a media center, nor is it intended to broadcast music to your stereo system. See the [legal warning](#warning-and-disclaimer).
 
 ## How to use it?
 
@@ -26,7 +26,10 @@ PiFM 1.2, depends on a number of prerequisites. To ensure that all of these are 
 **Important.** The binaries compiled for the Raspberry Pi 1 are not compatible with the Raspberry Pi 2/3, and conversely. Always re-compile when switching models, so re-run the installer when switching models.
 
 Clone or download the source repository and run `install.sh` in the `PiFM` directory:
-git clone https://github/com/mundeeplamport
+git clone https://github/com/mundeeplamport/PiFM
+./PiFM/install.sh
+
+This will run the installation script for the software and is a fully automated process, but also very verbose, so you can see what it is doing. Please note that your Raspberry Pi will automatically reboot. For a GUI based installation, double click on "install.sh" and click "execute in terminal", this way you will have a detailed view of the installation procedure.
 
 This will generate an FM transmission on 87.6 MHz, with default station name (PS), radiotext (RT) and PI-code, without audio. The radiofrequency signal is emitted on GPIO 4 (pin 7 on header P1).
 
