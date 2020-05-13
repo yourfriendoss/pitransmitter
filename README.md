@@ -2,7 +2,7 @@ PiFM GTK 1.2
 =========
 
 
-## FM-RDS transmitter using the Raspberry Pi
+## FM RDS transmitter using the Raspberry Pi
 
 This program generates an FM modulation, with RDS (Radio Data System) data generated in real time as well as having the ability to use both monophonic and stereophonic audio.
 
@@ -20,14 +20,14 @@ It is compatible with the Raspberry Pi 1, 2, 3, Zero.
 PiFmAdv has been developed solely for experimentation purposes only. It is not a media center, nor is it intended to broadcast music to your stereo system. See the [legal warning](#warning-and-disclaimer).
 
 ## Installation
-PiFM 1.2 depends on a number of prerequisites. To ensure that all of these are in place, first run the `install.sh` script. This will perform a number of relevant commands to get the transmitter up and running.
+PiFM 1.2 depends on a number of prerequisites. To ensure that all of these are in place, first run the `setup.sh` script. This will perform a number of relevant commands to get the transmitter up and running.
 
-Clone or download the source repository and run `install.sh` in the `PiFM` directory:
+Clone or download the source repository and run `setup.sh` in the `PiFM` directory:
 ```
 git clone https://github/com/mundeeplamport/PiFM
-./PiFM/install.sh
+./PiFM/setup.sh
 ```
-This will run the installation script for the software and is a fully automated process, but also very verbose, so you can see what it is doing. Please note that your Raspberry Pi will automatically reboot after installation is complete. **For a GUI based installation, double-click on `install.sh`** and click "execute in terminal", this way you will have a detailed view of the installation procedure.
+This will run the installation script for the software and is a fully automated process, but also very verbose, so you can see what it is doing. Please note that your Raspberry Pi will automatically reboot after installation is complete. **For a GUI based installation, double-click on `setup.sh`** and click "execute in terminal", this way you will have a detailed view of the installation procedure.
 
 **Important.** The binaries compiled for the Raspberry Pi 1 are not compatible with the Raspberry Pi 2/3, and conversely. Always re-compile when switching models. To do so, re-run the installer.
 
