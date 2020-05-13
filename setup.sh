@@ -8,35 +8,38 @@ echo "For more information about the software or issues, visit https://github.co
 echo "WARNING! Your system will restart once completed."
 sleep 10
 clear
-echo "Updating repository" ; sleep 2
+echo "Updating repository" ; sleep 1
 sudo apt-get update
 echo " "
-echo "Installing required tools" ; sleep 2
+echo "Installing required tools" ; sleep 1
 sudo apt-get install libsndfile1-dev zenity git -y
 echo " "
-echo "Changing directory -> src" ; sleep 2
+echo "Changing directory -> src" ; sleep 1
 cd /home/pi/PiFM/src
 echo " "
-echo "Cleaning up" ; sleep 5
+echo "Cleaning up" ; sleep 1
 make clean
 echo " "
-echo "Compiling" ; sleep 10
+echo "Compiling" ; sleep 1
 make
-echo " "
-echo "Editing -> /boot/config.txt" ; sleep 2
+clear
+echo "Editing -> /boot/config.txt" ; sleep 1
 echo "gpu_freq=250" | sudo tee -a /boot/config.txt > /dev/null
 echo " "
-echo "Adding shortcuts" ; sleep 2
+echo "Adding software" ; sleep 1
 cd /home/pi/PiFM
 sudo cp radio.sh /usr/local/bin
 sudo mv /usr/local/bin/radio.sh /usr/local/bin/radio
+echo "Creating shortcuts" ; sleep 1
 sudo cp /home/pi/PiFM/src/PiFM.desktop /home/pi/Desktop
 sudo cp /home/pi/PiFM/src/PiFM.desktop /usr/share/applications
 sudo mv /home/pi/PiFM/src/pi_fm_adv /home/pi/PiFM/src/PiFM
 echo "Patching xterm" ; sleep 1
+cd /usr/bin
 sudo cp lxterminal xterm
 echo "Assigning permissions" ; sleep 1
-chmod +x 777 /home/pi/PiFM/radio.sh
+cd /home/pi
+chmod +x /home/pi/PiFM/radio.sh
 echo "Completed" ; sleep 2
 echo " "
 echo "To start broadcasting, use the start menu/desktop shortcuts, or type "radio" into the terminal" ; sleep 5
