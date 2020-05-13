@@ -25,7 +25,7 @@ PiFM 1.2 depends on a number of prerequisites. To ensure that all of these are i
 Clone or download the source repository and run `setup.sh` in the `PiFM` directory:
 ```
 git clone https://github/com/mundeeplamport/PiFM
-chmod +x /PiFM/seup.sh
+chmod 777 /PiFM/seup.sh
 ./PiFM/setup.sh
 ```
 This will run the installation script for the software and is a fully automated process, but also very verbose, so you can see what it is doing. Please note that your Raspberry Pi will automatically reboot after installation is complete. **For a GUI based installation, double-click on `setup.sh`** and click "execute in terminal", this way you will have a detailed view of the installation procedure.
