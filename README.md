@@ -15,7 +15,7 @@ This project is based on an earlier FM transmitter developed by [Oliver Mattos a
 
 It is compatible with the Raspberry Pi 1, 2, 3, Zero.
 
-![](doc/vfd_display.jpg)
+![](doc/radio.jpg)
 
 PiFmAdv has been developed solely for experimentation purposes only. It is not a media center, nor is it intended to broadcast music to your stereo system. See the [legal warning](#warning-and-disclaimer).
 
