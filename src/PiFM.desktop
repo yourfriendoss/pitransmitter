@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Name=PiFM
+Comment=Broadcast from your Raspberry Pi!
+GenericName=Transmitter
+Icon=/home/pi/PiFM/src/PiFM.png
+Terminal=true
+Type=Application
+Exec= /home/pi/PiFM/radio.sh
+
