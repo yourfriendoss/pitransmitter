@@ -1,48 +1,32 @@
-PiFm 1.2
+PiFM 1.2
 =========
 
 
 ## FM-RDS transmitter using the Raspberry Pi
 
-This program generates an FM modulation, with RDS (Radio Data System) data generated in real time. It can include monophonic or stereophonic audio.
+This program generates an FM modulation, with RDS (Radio Data System) data generated in real time as well as having the ability to use both monophonic and stereophonic audio.
 
-PiFmAdv modulates the PLLC instead of the clock divider for better signal purity, which means that the signal is also less noisy. This has a great impact on stereo as it's reception is way better.
+PiFmAdv modulates the PLLC instead of the clock divider for increased signal purity, meaning that the signal is also less noisy. This has a great impact on stereo, as it's reception is significantly better.
 
-For the PLLC modulation to be stable there is one additional step to do. Due to the low voltage detection the PLLC frequency can be reduced to safe value in an attempt to prevent crashes. When this happens, the carrier freqency changes based on the original GPU frequency.
-To prevent this, we can easily change the GPU freqency to match the safe frequency. Now when due to the low voltage detection the PLLC frequency changes to safe value, nothing happens as the normal value and safe value are the same.
+For the PLLC modulation to be stable there is an additional step. Due to the low-voltage detection, the PLLC frequency can be reduced to a safe value in an attempt to restrict crashes. When this happens, the carrier freqency changes based on the GPU frequency.
+To prevent this, we can tweak the GPU freqency to match the safe frequency. Now when due the low voltage detection occurs, the PLLC frequency changes to safe value, meaning nothing happens since the normal value and safe value are identical.
 
-Simply add `gpu_freq=250` to `/boot/config.txt`.
+This project is based on an earlier FM transmitter developed by [Oliver Mattos and Oskar Weigl](http://www.icrobotics.co.uk/wiki/index.php/Turning_the_Raspberry_Pi_Into_an_FM_Transmitter), and later adapted to using DMA by [Richard Hirst](https://github.com/richardghirst). Christophe Jacquet manipulated it, adding the RDS data generator and modulator. The transmitter uses the Raspberry Pi's PWM generator to produce VHF signals.
 
-It is based on the FM transmitter created by [Oliver Mattos and Oskar Weigl](http://www.icrobotics.co.uk/wiki/index.php/Turning_the_Raspberry_Pi_Into_an_FM_Transmitter), and later adapted to using DMA by [Richard Hirst](https://github.com/richardghirst). Christophe Jacquet adapted it and added the RDS data generator and modulator. The transmitter uses the Raspberry Pi's PWM generator to produce VHF signals.
-
-It is compatible with both the Raspberry Pi 1 (the original one) and the Raspberry Pi 2 and 3.
+It is compatible with the Raspberry Pi 1, 2, 3, Zero.
 
 ![](doc/vfd_display.jpg)
 
-PiFmAdv has been developed for experimentation only. It is not a media center, it is not intended to broadcast music to your stereo system. See the [legal warning](#warning-and-disclaimer).
+PiFmAdv has been developed solely for experimentation purposes only. It is not a media center, not is it intended to broadcast music to your stereo system. See the [legal warning](#warning-and-disclaimer).
 
 ## How to use it?
 
-PiFmAdv, depends on the `sndfile` library. To install this library on Debian-like distributions, for instance Raspbian, run `sudo apt-get install libsndfile1-dev`.
+PiFM 1.2, depends on a number of prerequisites. To ensure that all of these are in place, first run the install.sh script. This will perform a number of relevant tasks to get the transmitter up and running.
 
-PiFmAdv also depends on the Linux `rpi-mailbox` driver, so you need a recent Linux kernel. The Raspbian releases from August 2015 have this.
+**Important.** The binaries compiled for the Raspberry Pi 1 are not compatible with the Raspberry Pi 2/3, and conversely. Always re-compile when switching models, so re-run the installer when switching models.
 
-**Important.** The binaries compiled for the Raspberry Pi 1 are not compatible with the Raspberry Pi 2/3, and conversely. Always re-compile when switching models, so do not skip the `make clean` step in the instructions below!
-
-Clone the source repository and run `make` in the `src` directory:
-
-```bash
-git clone https://github.com/Miegl/PiFmAdv.git
-cd PiFmAdv/src
-make clean
-make
-```
-
-Then you can just run:
-
-```
-sudo ./pi_fm_adv
-```
+Clone or download the source repository and run `install.sh` in the `PiFM` directory:
+git clone https://github/com/mundeeplamport
 
 This will generate an FM transmission on 87.6 MHz, with default station name (PS), radiotext (RT) and PI-code, without audio. The radiofrequency signal is emitted on GPIO 4 (pin 7 on header P1).
 
