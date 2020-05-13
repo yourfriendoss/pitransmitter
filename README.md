@@ -40,14 +40,27 @@ Once loaded, a pop-up will appear giving you information about the software as w
 Included are a number of sample audio files located in the `src` directory
 * `noise_22050.wav` is static sound
 * `pulses.wav` is a single pulse
-* `sound.wav` is the default file for testing signal quality vs. range
+* `sound.wav` is the file for testing signal quality vs. range
 * `stereo_44010` allows you to try stereophonic audio
 
-To exit the application, make the terminal window active and click CTRL+C to force-quit the program.
-The more general syntax for running Pi-FM-RDS is as follows:
+To exit the application, make the terminal window active and click CTRL+C to force-quit the program. This will quit you to the terminal.
 
-All arguments are optional:
-
+### Advanced Users (those confident with a terminal)
+You can also use PiFM using the terminal
+```
+cd /home/pi/PiFM/src
+sudo ./PiFM
+```
+This will generate an FM transmission on 87.6Mhz, with default station name (PS), radiotext (RT) and PI-code (PI), without audio. The radio frequency signal is emitted on GPIO 4 (pin 7 on header P1).
+You can add monophonic or stereophonic audio by refererncing an audio file as follows:
+```
+sudo ./PiFM --audio sound.wav
+```
+To test stereophonic audio, you can try the file `stereo_44100.wav` which has been provided.
+```
+sudo ./PiFM --audio stereo_44100.wav
+```
+**All arguments are optional:**
 * `--freq` specifies the carrier frequency (in MHz). Example: `--freq 87.6`.
 * `--audio` specifies an audio file to play as audio. The sample rate does not matter: PiFmAdv will resample and filter it. If a stereo file is provided, PiFmAdv will produce an FM-Stereo signal. Example: `--audio sound.wav`. The supported formats depend on `libsndfile`. This includes WAV and Ogg/Vorbis (among others) but not MP3. Specify `-` as the file name to read audio data on standard input (useful for piping audio into PiFmAdv, see below).
 * `--pi` specifies the PI-code of the RDS broadcast. 4 hexadecimal digits. Example: `--pi FFFF`.
