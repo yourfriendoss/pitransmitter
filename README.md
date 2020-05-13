@@ -42,12 +42,9 @@ Included are a number of sample audio files located in the `src` directory
 * `pulses.wav` is a single pulse
 * `sound.wav` is the default file for testing signal quality vs. range
 * `stereo_44010` allows you to try stereophonic audio
+
 To exit the application, make the terminal window active and click CTRL+C to force-quit the program.
 The more general syntax for running Pi-FM-RDS is as follows:
-
-```
-pi_fm_adv
-```
 
 All arguments are optional:
 
