@@ -29,18 +29,20 @@ Clone or download the source repository and run `install.sh` in the `PiFM` direc
 git clone https://github/com/mundeeplamport/PiFM
 ./PiFM/install.sh
 ```
-This will run the installation script for the software and is a fully automated process, but also very verbose, so you can see what it is doing. Please note that your Raspberry Pi will automatically reboot. **For a GUI based installation, double-click on `install.sh`** and click "execute in terminal", this way you will have a detailed view of the installation procedure.
+This will run the installation script for the software and is a fully automated process, but also very verbose, so you can see what it is doing. Please note that your Raspberry Pi will automatically reboot after installation is complete. **For a GUI based installation, double-click on `install.sh`** and click "execute in terminal", this way you will have a detailed view of the installation procedure.
 
 ## Usage
-This will generate an FM transmission on 87.6 MHz, with default station name (PS), radiotext (RT) and PI-code, without audio. The radiofrequency signal is emitted on GPIO 4 (pin 7 on header P1).
-You can add monophonic or stereophonic audio by referencing an audio file as follows:
+Find the PiFM shortcut in the applications menu in the 'other' submenu.
+Use the shortcut located on the desktop.
+Open a terminal window and type `radio` and hit enter, which will directly load the application.
 
-```
-sudo ./pi_fm_adv --audio sound.wav
-```
-
-To test stereophonic audio, you can try the file `stereo_44100.wav` provided.
-
+Once loaded, a pop-up will appear giving you information about the software as well as the supported file types. After clicking Begin you will be faced with a series of variables allowing you to change the properties of the FM-RDS transmission. After choosing the final option, the software will start.
+Included are a number of sample audio files located in the `src` directory
+* `noise_22050.wav` is static sound
+* `pulses.wav` is a single pulse
+* `sound.wav` is the default file for testing signal quality vs. range
+* `stereo_44010` allows you to try stereophonic audio
+To exit the application, make the terminal window active and click CTRL+C to force-quit the program.
 The more general syntax for running Pi-FM-RDS is as follows:
 
 ```
