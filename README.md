@@ -193,4 +193,5 @@ The samples are played by `pi_fm_adv.c` that is adapted from Richard Hirst's [Pi
 --------
 
 © [Miegl](https://miegl.cz) & [Christophe Jacquet](http://www.jacquet80.eu/) (F8FTK), 2014-2017. Released under the GNU GPL v3.
+
 © [Mundeep Lamport] 2020. Re-released under the GNU GPL v3.
