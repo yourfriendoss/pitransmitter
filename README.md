@@ -187,8 +187,9 @@ The samples are played by `pi_fm_adv.c` that is adapted from Richard Hirst's [Pi
 
 
 ## History
-
-* 2015-09-05: support for the Raspberry Pi 2
+* 2020-05-13: PiFM 1.2 developed and released (zenity based gui)
+* 2019-12-01: PiFM 1.1 developed as a personal project (command-line ui)
+* 2015-09-05: support for the Raspberry Pi 2/3
 * 2014-11-01: support for toggling the Traffic Announcement (TA) flag at run-time
 * 2014-10-19: bugfix (cleanly stop the DMA engine when the specified file does not exist, or it's not possible to read from stdin)
 * 2014-08-04: bugfix (ppm now uses floats)
