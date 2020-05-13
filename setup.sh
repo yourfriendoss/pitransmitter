@@ -35,6 +35,8 @@ sudo cp /home/pi/PiFM/src/PiFM.desktop /usr/share/applications
 sudo mv /home/pi/PiFM/src/pi_fm_adv /home/pi/PiFM/src/PiFM
 echo "Patching xterm" ; sleep 1
 sudo cp lxterminal xterm
+echo "Assigning permissions" ; sleep 1
+chmod +x 777 /home/pi/PiFM/radio.sh
 echo "Completed" ; sleep 2
 clear
 echo "To start broadcasting, use the start menu/desktop shortcuts, or type "radio" into the terminal" ; sleep 5
