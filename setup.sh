@@ -4,8 +4,8 @@
 clear
 echo "Welcome to the PiFM installer. This script will help you get up and running."
 echo "PiFM currently supports: Pi 1, 2, 3, Zero. The 4 is not yet supported."
-echo "For more information about the software or issues, visit https://github.com/mundeeplamport"
-echo "WARNING! Your system will restart once completed."
+echo "For more information, visit https://github.com/mundeeplamport"
+echo "WARNING! Your system will reboot once completed."
 sleep 10
 clear
 echo "Updating repository" ; sleep 1
@@ -13,10 +13,10 @@ sudo apt-get update
 echo " "
 echo "Installing required tools" ; sleep 1
 sudo apt-get install libsndfile1-dev zenity git -y
-echo " "
+clear
 echo "Changing directory -> src" ; sleep 1
 cd /home/pi/PiFM/src
-echo " "
+clear
 echo "Cleaning up" ; sleep 1
 make clean
 echo " "
@@ -25,24 +25,30 @@ make
 clear
 echo "Editing -> /boot/config.txt" ; sleep 1
 echo "gpu_freq=250" | sudo tee -a /boot/config.txt > /dev/null
-echo " "
+clear
 echo "Adding software" ; sleep 1
 cd /home/pi/PiFM
 sudo cp radio.sh /usr/local/bin
 sudo mv /usr/local/bin/radio.sh /usr/local/bin/radio
+clear
 echo "Creating shortcuts" ; sleep 1
 sudo cp /home/pi/PiFM/src/PiFM.desktop /home/pi/Desktop
 sudo cp /home/pi/PiFM/src/PiFM.desktop /usr/share/applications
 sudo mv /home/pi/PiFM/src/pi_fm_adv /home/pi/PiFM/src/PiFM
+clear
 echo "Patching xterm" ; sleep 1
 cd /usr/bin
 sudo cp lxterminal xterm
+clear
 echo "Assigning permissions" ; sleep 1
 cd /home/pi
 chmod +x /home/pi/PiFM/radio.sh
+clear
 echo "Completed" ; sleep 2
 echo " "
-echo "To start broadcasting, use the start menu/desktop shortcuts, or type "radio" into the terminal" ; sleep 5
+echo "To start broadcasting, use the start menu/desktop shortcuts,"
+echo "or type radio into the terminal. Preparing reboot..."
+sleep 5
 echo -ne 'Rebooting in 5\r'
 sleep 1
 echo -ne 'Rebooting in 4\r'
@@ -54,5 +60,4 @@ sleep 1
 echo -ne 'Rebooting in 1\r'
 sleep 1
 echo -ne 'Rebooting now \r'
-echo -ne '\n'
 sudo reboot
