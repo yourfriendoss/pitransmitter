@@ -95,7 +95,7 @@ sox -t mp3 http://www.linuxvoice.com/episodes/lv_s02e01.mp3 -t wav -  | sudo ./P
 ```
 Or to pipe the AUX input of a sound card into PiFmAdv...
 ```
-sudo arecord -fS16_LE -r 44100 -Dplughw:1,0 -c 2 -  | sudo ./pi_fm_adv --audio -
+sudo arecord -fS16_LE -r 44100 -Dplughw:1,0 -c 2 -  | sudo ./PiFM --audio -
 ```
 ## Changing PS, RT, TA and PTY at run-time
 You can control PS, RT, TA (Traffic Announcement flag) and PTY (Program Type) at run-time using a named pipe (FIFO). For this, run PiFM with the `--ctl` argument.
@@ -103,7 +103,7 @@ You can control PS, RT, TA (Traffic Announcement flag) and PTY (Program Type) at
 Example:
 ```
 mkfifo rds_ctl
-sudo ./pi_fm_adv --ctl rds_ctl
+sudo ./PiFM --ctl rds_ctl
 ```
 Then you can send “commands” to change PS, RT, TA and PTY:
 ```
