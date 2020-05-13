@@ -22,14 +22,14 @@ PiFmAdv has been developed solely for experimentation purposes only. It is not a
 ## Installation
 PiFM 1.2 depends on a number of prerequisites. To ensure that all of these are in place, first run the `install.sh` script. This will perform a number of relevant commands to get the transmitter up and running.
 
-**Important.** The binaries compiled for the Raspberry Pi 1 are not compatible with the Raspberry Pi 2/3, and conversely. Always re-compile when switching models. To do so, re-run the installer.
-
 Clone or download the source repository and run `install.sh` in the `PiFM` directory:
 ```
 git clone https://github/com/mundeeplamport/PiFM
 ./PiFM/install.sh
 ```
 This will run the installation script for the software and is a fully automated process, but also very verbose, so you can see what it is doing. Please note that your Raspberry Pi will automatically reboot after installation is complete. **For a GUI based installation, double-click on `install.sh`** and click "execute in terminal", this way you will have a detailed view of the installation procedure.
+
+**Important.** The binaries compiled for the Raspberry Pi 1 are not compatible with the Raspberry Pi 2/3, and conversely. Always re-compile when switching models. To do so, re-run the installer.
 
 ## Usage
 Find the PiFM shortcut in the applications menu in the 'other' submenu.
@@ -41,7 +41,7 @@ Included are a number of sample audio files located in the `src` directory
 * `noise_22050.wav` is static sound
 * `pulses.wav` is a single pulse
 * `sound.wav` is the file for testing signal quality vs. range
-* `stereo_44010` allows you to try stereophonic audio
+* `stereo_44100` allows you to try stereophonic audio
 
 To exit the application, make the terminal window active and click CTRL+C to force-quit the program. This will quit you to the terminal.
 
@@ -52,7 +52,7 @@ cd /home/pi/PiFM/src
 sudo ./PiFM
 ```
 This will generate an FM transmission on 87.6Mhz, with default station name (PS), radiotext (RT) and PI-code (PI), without audio. The radio frequency signal is emitted on GPIO 4 (pin 7 on header P1).
-You can add monophonic or stereophonic audio by refererncing an audio file as follows:
+You can add monophonic or stereophonic audio by referencing an audio file as follows:
 ```
 sudo ./PiFM --audio sound.wav
 ```
@@ -82,43 +82,30 @@ sudo ./PiFM --audio stereo_44100.wav
 
 By default the PS changes back and forth between `PiFmAdv` and a sequence number, starting at `00000000`. The PS changes around one time per second.
 
-
 **Clock calibration (only if experiencing difficulties)**
-
 The RDS standards states that the error for the 57 kHz subcarrier must be less than ± 6 Hz, i.e. less than 105 ppm (parts per million). The Raspberry Pi's oscillator error may be above this figure. That is where the `--ppm` parameter comes into play: you specify your Pi's error and PiFmAdv adjusts the clock dividers accordingly.
 In practice, I found that PiFmAdv works quite well even without using the `--ppm` parameter. This may be due to the majority of receivers being more tolerant than outlined in the RDS specification.
 
-One way to measure the ppm error is to play the `pulses.wav` file: it will play a pulse for precisely 1 second, then play a 1-second silence, and so on. Record the audio output from a radio with a good audio card. Say you sample at 44.1 kHz. Measure 10 intervals. Using [Audacity](http://audacity.sourceforge.net/), for example, determine the number of samples of these 10 intervals: in the absence of clock error, it should be 441,000 samples. With my Pi, I found 441,132 samples. Therefore, my ppm error is (441132-441000)/441000 * 1e6 = 299 ppm, **assuming that my sampling device (audio card) has no clock error...**
+One way to measure the ppm error is to play the `pulses.wav` file: it will play a pulse for precisely 1 second, then play a 1-second silence, and so on. Record the audio output from a radio with a good audio card. Say you sample at 44.1 kHz. Measure 10 intervals. Using [Audacity](http://audacity.sourceforge.net/), for example, determine the number of samples of these 10 intervals: in the absence of clock error, it should be 441,000 samples. With my Pi, I found 441,132 samples. Therefore, the ppm error is (441132-441000)/441000 * 1e6 = 299 ppm, **assuming that the sampling device (audio card) has no clock error...**
 
-
-### Piping audio into PiFmAdv
-
-If you use the argument `--audio -`, PiFmAdv reads audio data on standard input. This allows you to pipe the output of a program into PiFmAdv. For instance, this can be used to read MP3 files using Sox:
-
+**Piping audio into PiFmAdv**
+If you use the argument `--audio -`, PiFM reads audio data on standard input. This allows you to pipe the output of a program into PiFM. For instance, this can be used to read MP3 files using Sox:
 ```
-sox -t mp3 http://www.linuxvoice.com/episodes/lv_s02e01.mp3 -t wav -  | sudo ./pi_fm_adv --audio -
+sox -t mp3 http://www.linuxvoice.com/episodes/lv_s02e01.mp3 -t wav -  | sudo ./PiFM --audio -
 ```
-
-Or to pipe the AUX input of a sound card into PiFmAdv:
-
+Or to pipe the AUX input of a sound card into PiFmAdv...
 ```
 sudo arecord -fS16_LE -r 44100 -Dplughw:1,0 -c 2 -  | sudo ./pi_fm_adv --audio -
 ```
-
-
 ### Changing PS, RT, TA and PTY at run-time
-
-You can control PS, RT, TA (Traffic Announcement flag) and PTY (Program Type) at run-time using a named pipe (FIFO). For this run PiFmAdv with the `--ctl` argument.
+You can control PS, RT, TA (Traffic Announcement flag) and PTY (Program Type) at run-time using a named pipe (FIFO). For this, run PiFM with the `--ctl` argument.
 
 Example:
-
 ```
 mkfifo rds_ctl
 sudo ./pi_fm_adv --ctl rds_ctl
 ```
-
 Then you can send “commands” to change PS, RT, TA and PTY:
-
 ```
 cat >rds_ctl
 PS MyText
@@ -129,59 +116,52 @@ PS OtherTxt
 TA OFF
 ...
 ```
-
 Every line must start with either `PS`, `RT`, `TA` or `PTY`, followed by one space character, and the desired value. Any other line format is silently ignored. `TA ON` switches the Traffic Announcement flag to *on*, any other value switches it to *off*.
 
-
 ## Warning and Disclaimer
-
-PiFmAdv is an **experimental** program, designed **only for experimentation**. It is in no way intended to become a personal *media center* or a tool to operate a *radio station*, or even broadcast sound to one's own stereo system.
+PiFM is an **very experimental** program, designed **ONLY for experimentation**. It is in no way intended to become a personal *media center* or a tool to operate a *radio station*, or even broadcast sound to one's own stereo system.
 
 In most countries, transmitting radio waves without a state-issued licence specific to the transmission modalities (frequency, power, bandwidth, etc.) is **illegal**.
 
 Therefore, always connect a shielded transmission line from the Raspberry Pi directly
 to a radio receiver, so as **not** to emit radio waves. Never use an antenna.
 
-Even if you are a licensed amateur radio operator, using PiFmAdv to transmit radio waves on ham frequencies without any filtering between the RaspberryPi and an antenna is most probably illegal because the square-wave carrier is very rich in harmonics, so the bandwidth requirements are likely not met.
+Even if you are a licensed amateur radio operator, using PiFM to transmit radio waves on ham frequencies without any filtering between the Raspberry Pi and an antenna is most most likely illegal since the square-wave carrier is very rich in harmonics, so the bandwidth requirements are likely not met.
 
-I could not be held liable for any misuse of your own Raspberry Pi. Any experiment is made under your own responsibility.
-
+I can not be held liable for any misuse of your own Raspberry Pi. Any experimentation is done under your own responsibility.
 
 ## Tests
+PiFM was successfully tested with the following RDS-able devices, namely:
 
-PiFmAdv was successfully tested with all my RDS-able devices, namely:
-
+* a Roberts Play DAB/DAB+/FM RDS Digital Radio from 2015
 * a Sony ICF-C20RDS alarm clock from 1995,
 * a Sangean PR-D1 portable receiver from 1998, and an ATS-305 from 1999,
 * a Samsung Galaxy S2 mobile phone from 2011,
 * a Philips MBD7020 hifi system from 2012,
 * a Silicon Labs [USBFMRADIO-RD](http://www.silabs.com/products/mcu/Pages/USBFMRadioRD.aspx) USB stick, employing an Si4701 chip, and using my [RDS Surveyor](http://rds-surveyor.sourceforge.net/) program,
-* a “PCear Fm Radio”, a Chinese clone of the above, again using RDS Surveyor.
+* a “PCear FM Radio”, a Chinese clone of the above, again, using RDS Surveyor.
 
-Reception works perfectly with all the devices above. RDS Surveyor reports no group errors.
+Reception works perfectly with all the devices above and RDS Surveyor reports no group errors.
 
 ![](doc/galaxy_s2.jpg)
 
 
 ### CPU Usage
-
 CPU usage is as follows:
-
 * without audio: 9%
 * with mono audio: 33%
 * with stereo audio: 40%
 
-CPU usage increases dramatically when adding audio because the program has to upsample the (unspecified) sample rate of the input audio file to 228 kHz, its internal operating sample rate. Doing so, it has to apply an FIR filter, which is costly.
+CPU usage increases dramatically when adding audio because the program has to upsample the (unspecified) sample rate of the input audio file to 228 kHz, its internal operating sample rate. Doing so, it has to apply an FIR filter, which is cpu intensive.
 
 ## Design
-
 The RDS data generator lies in the `rds.c` file.
 
 The RDS data generator generates cyclically four 0A groups (for transmitting PS), and one 2A group (for transmitting RT). In addition, every minute, it inserts a 4A group (for transmitting CT, clock time). `get_rds_group` generates one group, and uses `crc` for computing the CRC.
 
 To get samples of RDS data, call `get_rds_samples`. It calls `get_rds_group`, differentially encodes the signal and generates a shaped biphase symbol. Successive biphase symbols overlap: the samples are added so that the result is equivalent to applying the shaping filter (a [root-raised-cosine (RRC) filter ](http://en.wikipedia.org/wiki/Root-raised-cosine_filter) specified in the RDS standard) to a sequence of Manchester-encoded pulses.
 
-The shaped biphase symbol is generated once and for all by a Python program called `generate_waveforms.py` that uses [Pydemod](https://github.com/ChristopheJacquet/Pydemod), one of my other software radio projects. This Python program generates an array called `waveform_biphase` that results from the application of the RRC filter to a positive-negative impulse pair. *Note that the output of `generate_waveforms.py`, two files named `waveforms.c` and `waveforms.h`, are included in the Git repository, so you don't need to run the Python script yourself to compile PiFmAdv.*
+The shaped biphase symbol is generated once and for all by a Python program called `generate_waveforms.py` that uses [Pydemod](https://github.com/ChristopheJacquet/Pydemod), another software radio project. This Python program generates an array called `waveform_biphase` that results from the application of the RRC filter to a positive-negative impulse pair. *Note that the output of `generate_waveforms.py`, two files named `waveforms.c` and `waveforms.h`, are included in the Git repository, so you don't need to run the Python script yourself to compile PiFM.*
 
 Internally, the program samples all signals at 228 kHz, four times the RDS subcarrier's 57 kHz.
 
@@ -213,3 +193,4 @@ The samples are played by `pi_fm_adv.c` that is adapted from Richard Hirst's [Pi
 --------
 
 © [Miegl](https://miegl.cz) & [Christophe Jacquet](http://www.jacquet80.eu/) (F8FTK), 2014-2017. Released under the GNU GPL v3.
+© [Mundeep Lamport] 2020. Re-released under the GNU GPL v3.
