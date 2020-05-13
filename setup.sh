@@ -17,10 +17,10 @@ echo " "
 echo "Changing directory -> src" ; sleep 2
 cd src
 echo " "
-echo "Cleaning up" ; sleep 2
+echo "Cleaning up" ; sleep 5
 make clean
 echo " "
-echo "Compiling" ; sleep 2
+echo "Compiling" ; sleep 10
 make
 echo " "
 echo "Editing -> /boot/config.txt" ; sleep 2
@@ -38,7 +38,8 @@ sudo cp lxterminal xterm
 echo "Assigning permissions" ; sleep 1
 chmod +x 777 /home/pi/PiFM/radio.sh
 echo "Completed" ; sleep 2
-clear
+echo " "
+echo " "
 echo "To start broadcasting, use the start menu/desktop shortcuts, or type "radio" into the terminal" ; sleep 5
 echo -ne 'Rebooting in 5\r'
 sleep 1
