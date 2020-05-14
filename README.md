@@ -21,8 +21,7 @@ To prevent this, we can tweak the GPU freqency to match the safe frequency. Now 
 This project is based on an earlier FM transmitter developed by [Oliver Mattos and Oskar Weigl](http://www.icrobotics.co.uk/wiki/index.php/Turning_the_Raspberry_Pi_Into_an_FM_Transmitter), and later adapted to using DMA by [Richard Hirst](https://github.com/richardghirst). Christophe Jacquet manipulated it, adding the RDS data generator and modulator. The transmitter uses the Raspberry Pi's PWM generator to produce VHF signals.
 
 ![](doc/radio.jpg)
-
-PiFmAdv has been developed solely for experimentation purposes only. It is not a media center, nor is it intended to broadcast music to your stereo system. See the [legal warning](#warning-and-disclaimer).
+PiFM has been developed solely for experimentation only. See the [legal warning](#warning-and-disclaimer).
 
 ## Prepping the Pi
 **Required Equipment:**
@@ -38,6 +37,7 @@ PiFmAdv has been developed solely for experimentation purposes only. It is not a
 **Optional Equipment:**
 * Portable display (to make it more compact and portable)
 * Portable power bank (so that you can use it wherever you are!)
+* USB drive (to store your .wav and .ogg audio files)
 
 ## Installation
 PiFM 1.2 depends on a number of prerequisites. To ensure that all of these are in place, first run the `setup.sh` script. This will perform a number of relevant commands to get the transmitter ready.
@@ -66,8 +66,8 @@ This begins the installation script for the software and is a fully automated pr
 * Find the PiFM shortcut in the applications menu in the 'other' submenu.
 * Use the shortcut located on the desktop.
 * Open a terminal window and type `PiFM` and hit enter.
-* For a more basic, yet still simple method, type `PiFM-basic` into a terminal and hit enter.
-Once loaded, a pop-up will appear giving you information about the software as well as the supported file types. After clicking Begin, you will be faced with a series of variables allowing you to change the properties of the FM-RDS transmission. After choosing the final option, the software will start.
+* For a terminal based, yet still simple method, type `PiFM-basic` into a terminal and hit enter.
+Once loaded, a pop-up will appear providing information about the software as well as the supported file types. After clicking Begin, you will be faced with a series of variables allowing you to change the properties of the FM-RDS transmission. After choosing the final option, the software will start.
 
 Included are a number of sample audio files located in the `sounds` directory
 * `noise_22050.wav` is static sound
@@ -120,12 +120,12 @@ In practice, I found that PiFmAdv works quite well even without using the `--ppm
 
 One way to measure the ppm error is to play the `pulses.wav` file: it will play a pulse for precisely 1 second, then play a 1-second silence, and so on. Record the audio output from a radio with a good audio card. Say you sample at 44.1 kHz. Measure 10 intervals. Using [Audacity](http://audacity.sourceforge.net/), for example, determine the number of samples of these 10 intervals: in the absence of clock error, it should be 441,000 samples. With my Pi, I found 441,132 samples. Therefore, the ppm error is (441132-441000)/441000 * 1e6 = 299 ppm, **assuming that the sampling device (audio card) has no clock error...**
 
-## Piping audio into PiFmAdv
+## Piping audio into PiFM
 If you use the argument `--audio -`, PiFM reads audio data on standard input. This allows you to pipe the output of a program into PiFM. For instance, this can be used to read MP3 files using Sox:
 ```
 sox -t mp3 http://www.linuxvoice.com/episodes/lv_s02e01.mp3 -t wav -  | sudo ./PiFM --audio -
 ```
-Or to pipe the AUX input of a sound card into PiFmAdv...
+Or to pipe the AUX input of a sound card into PiFM...
 ```
 sudo arecord -fS16_LE -r 44100 -Dplughw:1,0 -c 2 -  | sudo ./PiFM --audio -
 ```
@@ -151,7 +151,7 @@ TA OFF
 Every line must start with either `PS`, `RT`, `TA` or `PTY`, followed by one space character, and the desired value. Any other line format is silently ignored. `TA ON` switches the Traffic Announcement flag to *on*, any other value switches it to *off*.
 
 ## Warning and Disclaimer
-PiFM is an **very experimental** program, designed **ONLY for experimentation**. It is in no way intended to become a personal *media center* or a tool to operate a *radio station*, or even broadcast sound to one's own stereo system.
+PiFM is an **very experimental** program, designed **only for experimentation**. It is in no way intended to become a personal *media center* or a tool to operate a *radio station*, or even broadcast sound to one's own stereo system.
 
 In most countries, transmitting radio waves without a state-issued licence specific to the transmission modalities (frequency, power, bandwidth, etc.) is **illegal**.
 
@@ -180,11 +180,11 @@ Reception works perfectly with all the devices above and RDS Surveyor reports no
 
 ## CPU Usage
 CPU usage is as follows:
-* without audio: 9%
-* with mono audio: 33%
-* with stereo audio: 40%
+* Without audio: 9%
+* With mono audio: 33%
+* With stereo audio: 40%
 
-CPU usage increases dramatically when adding audio because the program has to upsample the (unspecified) sample rate of the input audio file to 228 kHz, its internal operating sample rate. Doing so, it has to apply an FIR filter, which is cpu intensive.
+CPU usage increases dramatically when adding audio because the program has to upsample the (unspecified) sample rate of the input audio file to 228 kHz, its internal operating sample rate. Doing so, it has to apply an FIR filter, which is fairly CPU intensive.
 
 ## Design
 The RDS data generator lies in the `rds.c` file.
@@ -210,6 +210,7 @@ The samples are played by `pi_fm_adv.c` that is adapted from Richard Hirst's [Pi
 
 
 ## History
+* FUTURE    : PiFM will have input validation as well as a dipole calculator
 * 2020-05-13: PiFM 1.2 developed and released (zenity based gui)
 * 2019-12-01: PiFM 1.1 developed as a personal project (command-line ui)
 * 2015-09-05: support for the Raspberry Pi 2/3
@@ -224,7 +225,6 @@ The samples are played by `pi_fm_adv.c` that is adapted from Richard Hirst's [Pi
 
 --------
 
-© [Miegl](https://miegl.cz) & [Christophe Jacquet](http://www.jacquet80.eu/) (F8FTK), 2014-2017. Released under the GNU GPL v3.
-
+© [Miegl](https://miegl.cz) & [Christophe Jacquet](http://www.jacquet80.eu/), 2014-2017. Released under the GNU GPL v3.
 © [Mundeep Lamport](https://instagram.com/mundeep.l) 2020. Re-released under the GNU GPL v3.
 
