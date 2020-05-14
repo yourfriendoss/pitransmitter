@@ -2,7 +2,8 @@ PiFM GTK 1.2
 =========
 
 
-## FM RDS transmitter using the Raspberry Pi
+## What is PiFM?
+This first sections v=covers the need for PiFM GTK and why it was created. If you are only looking for the installation, skip to [Installation](#installation)
 
 This program generates an FM modulation, with RDS (Radio Data System) data generated in real time as well as having the ability to use both monophonic and stereophonic audio.
 
