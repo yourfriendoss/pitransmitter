@@ -3,10 +3,14 @@ PiFM GTK 1.2
 
 
 ## What is PiFM?
-This first sections covers the need for PiFM GTK and why it was created. If you are only looking for the installation, skip to the [installation](#installation).
+This first sections covers the need for PiFM GTK and why it was created. If you are only looking for the installation, skip ahead to the [installation](#installation).
 
 PiFM GTK is an extension to the already popular [PiFmAdv](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwio9Zml3rPpAhWMT8AKHY3pB3YQFjAAegQIBhAB&url=https%3A%2F%2Fgithub.com%2Fmiegl%2FPiFmAdv&usg=AOvVaw0yjOcSmzqDT7XF36NZs7zl) repository developd by Miegl. This extension features a small number of additional files that greatly assist the procedure to install and set up the software. The main focus of PiFM GTK is to allow anybody from a complete Linux or radio novice to a command-line expert or radiohead find an affordable substitute to a significantly more expensive FM transmitter which can cost thousands of times more than the Raspberry Pi. This is all controlled through an intuitive graphical interface based on the modern GTK library and means you don't have to struggle with a (for new users especially) intimidating command-line.
 
+## Compatibility
+This piece of software is designed to work will all versions of the Raspberry Pi with the exception of the 4. I will be sure to add this soon in a future revision of the software. The installation is designed to be done on Raspbian, which is the Official Raspberry Pi Operating System. It is guaranteed to work on any version from August 2015 and later, as the installer is automatically designed to check that all dependencies are present (previous versions do not have the `rpi-mailbox` driver), however it is recommended to use a fresh install to reduce the likelihood of any errors.
+
+## How it works
 This program generates an FM modulation, with RDS (Radio Data System) data generated in real time as well as having the ability to use both monophonic and stereophonic audio.
 
 PiFmAdv modulates the PLLC instead of the clock divider for increased signal purity, meaning that the signal is also less noisy. This has a great impact on stereo, as it's reception is significantly better.
@@ -16,13 +20,15 @@ To prevent this, we can tweak the GPU freqency to match the safe frequency. Now 
 
 This project is based on an earlier FM transmitter developed by [Oliver Mattos and Oskar Weigl](http://www.icrobotics.co.uk/wiki/index.php/Turning_the_Raspberry_Pi_Into_an_FM_Transmitter), and later adapted to using DMA by [Richard Hirst](https://github.com/richardghirst). Christophe Jacquet manipulated it, adding the RDS data generator and modulator. The transmitter uses the Raspberry Pi's PWM generator to produce VHF signals.
 
-It is compatible with the Raspberry Pi 1, 2, 3, Zero.
-
 ![](doc/radio.jpg)
 
 PiFmAdv has been developed solely for experimentation purposes only. It is not a media center, nor is it intended to broadcast music to your stereo system. See the [legal warning](#warning-and-disclaimer).
 
-## Installation
+## Installation instructions
+**Equipment:**
+* Raspberry Pi (1a, 1b, 1a+, 1b+, 2b, 3b, 3a+, 3b+, Zero, Zero W are all accepted models)
+* Acceptable power supply (recommended at least 2A)
+* SD Card (4gb minimum with Raspbian Desktop installed [installation guide](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/2))
 PiFM 1.2 depends on a number of prerequisites. To ensure that all of these are in place, first run the `setup.sh` script. This will perform a number of relevant commands to get the transmitter up and running.
 
 Clone or download the source repository and run `setup.sh` in the `PiFM` directory:
