@@ -10,7 +10,7 @@ PiFM GTK is an extension to the already popular [PiFmAdv](https://www.google.com
 ## Compatibility
 This piece of software is designed to work will all versions of the Raspberry Pi including the Raspberry Pi 4b! The installation is designed to be done on Raspbian, which is the Official Raspberry Pi Operating System. It is guaranteed to work on any version from August 2015 and later, as the installer is automatically designed to check that all dependencies are present (previous versions do not have the `rpi-mailbox` driver), however it is recommended to use a fresh install to reduce the likelihood of any errors.
 
-## How it works
+## How it Works
 This program generates an FM modulation, with RDS (Radio Data System) data generated in real time as well as having the ability to use both monophonic and stereophonic audio.
 
 PiFmAdv modulates the PLLC instead of the clock divider for increased signal purity, meaning that the signal is also less noisy. This has a great impact on stereo, as it's reception is significantly better.
@@ -106,7 +106,7 @@ To test stereophonic audio, you can try the file `stereo_44100.wav` which has be
 ```
 sudo ./PiFM --audio stereo_44100.wav
 ```
-## All arguments are optional:
+## All Arguments are Optional:
 * `--freq` specifies the carrier frequency (in MHz). Example: `--freq 87.6`.
 * `--audio` specifies an audio file to play as audio. The sample rate does not matter: PiFmAdv will resample and filter it. If a stereo file is provided, PiFmAdv will produce an FM-Stereo signal. Example: `--audio sound.wav`. The supported formats depend on `libsndfile`. This includes WAV and Ogg/Vorbis (among others) but not MP3. Specify `-` as the file name to read audio data on standard input (useful for piping audio into PiFM, see below).
 * `--pi` specifies the PI-code of the RDS broadcast. 4 hexadecimal digits. Example: `--pi FFFF`.
@@ -128,13 +128,13 @@ sudo ./PiFM --audio stereo_44100.wav
 
 By default the PS changes back and forth between `PiFmAdv` and a sequence number, starting at `00000000`. The PS changes around one time per second.
 
-## Clock calibration (only if experiencing difficulties)
+## Clock Calibration (only if experiencing difficulties)
 The RDS standards states that the error for the 57 kHz subcarrier must be less than ± 6 Hz, i.e. less than 105 ppm (parts per million). The Raspberry Pi's oscillator error may be above this figure. That is where the `--ppm` parameter comes into play: you specify your Pi's error and PiFmAdv adjusts the clock dividers accordingly.
 In practice, I found that PiFmAdv works quite well even without using the `--ppm` parameter. This may be due to the majority of receivers being more tolerant than outlined in the RDS specification.
 
 One way to measure the ppm error is to play the `pulses.wav` file: it will play a pulse for precisely 1 second, then play a 1-second silence, and so on. Record the audio output from a radio with a good audio card. Say you sample at 44.1 kHz. Measure 10 intervals. Using [Audacity](http://audacity.sourceforge.net/), for example, determine the number of samples of these 10 intervals: in the absence of clock error, it should be 441,000 samples. With my Pi, I found 441,132 samples. Therefore, the ppm error is (441132-441000)/441000 * 1e6 = 299 ppm, **assuming that the sampling device (audio card) has no clock error...**
 
-## Piping audio into PiFM
+## Piping Audio Into PiFM
 If you use the argument `--audio -`, PiFM reads audio data on standard input. This allows you to pipe the output of a program into PiFM. For instance, this can be used to read MP3 files using Sox:
 ```
 sox -t mp3 http://www.linuxvoice.com/episodes/lv_s02e01.mp3 -t wav -  | sudo ./PiFM --audio -
@@ -143,7 +143,7 @@ Or to pipe the AUX input of a sound card into PiFM...
 ```
 sudo arecord -fS16_LE -r 44100 -Dplughw:1,0 -c 2 -  | sudo ./PiFM --audio -
 ```
-## Changing PS, RT, TA and PTY at run-time
+## Changing PS, RT, TA and PTY at Run-Time
 You can control PS, RT, TA (Traffic Announcement flag) and PTY (Program Type) at run-time using a named pipe (FIFO). For this, run PiFM with the `--ctl` argument.
 
 Example:
@@ -238,8 +238,6 @@ The samples are played by `pi_fm_adv.c` that is adapted from Richard Hirst's [Pi
 * 2014-04-06: initial release, which only supported 228 kHz monophonic audio input files
 
 --------
-
-© [Miegl](https://miegl.cz) & [Christophe Jacquet](http://www.jacquet80.eu/), 2014-2017. Released under the GNU GPL v3.
 © [Mundeep Lamport](https://instagram.com/mundeep.l) 2020. Re-released under the GNU GPL v3.
 
 
