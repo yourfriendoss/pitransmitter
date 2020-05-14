@@ -47,6 +47,7 @@ PiFM 1.2.1 depends on a number of prerequisites. These are required. to get the 
 3. Once you are ready to start, turn on the Pi and wait until the desktop environment appears.
 4. At the top left of the screen click the terminal icon and wait for the terminal window to load
 5. Once it has loaded, type in the following commands.
+
 **Prior to Pi 4 Installation**
 ```
 git clone https://github/com/mundeeplamport/PiFM
