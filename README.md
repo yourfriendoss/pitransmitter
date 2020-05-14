@@ -48,18 +48,6 @@ PiFM 1.2.1 depends on a number of prerequisites. These are required. to get the 
 4. At the top left of the screen click the terminal icon and wait for the terminal window to load
 5. Once it has loaded, type in the following commands.
 
-**Prior to Pi 4 Installation**
-```
-git clone https://github/com/mundeeplamport/PiFM
-```
-This will download the software from this repository
-```
-chmod +x /home/pi/PiFM/setup.sh
-```
-This changes the permissions to allow you to run the setup
-```
-./PiFM/setup.sh
-```
 **Pi 4 Installation**
 ```
 git clone https://github/com/mundeeplamport/PiFM
@@ -71,6 +59,18 @@ chmod +x /home/pi/PiFM/setup-pi4.sh
 This changes the permissions to allow you to run the setup
 ```
 ./PiFM/setup-pi4.sh
+```
+**Previous Pi Versions**
+```
+git clone https://github/com/mundeeplamport/PiFM
+```
+This will download the software from this repository
+```
+chmod +x /home/pi/PiFM/setup.sh
+```
+This changes the permissions to allow you to run the setup
+```
+./PiFM/setup.sh
 ```
 This begins the installation script for the software and is a fully automated process, and very verbose, so you can see what is happening. Please note that your Raspberry Pi will automatically reboot after the installation is complete.
 
