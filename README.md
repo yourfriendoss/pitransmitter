@@ -88,6 +88,10 @@ Included are a number of sample audio files located in the `sounds` directory
 * `pulses.wav` is a single pulse
 * `sound.wav` is the file for testing signal quality vs. range
 * `stereo_44100` allows you to try stereophonic audio
+Also included is a dipole calculator allowing you to calculate your antenna length. To use it, open a terminal and type:
+```
+python3 dipole
+```
 
 If at any point you wish to close the broadcast, make the terminal window active and press CTRL and C at the same to close the program.
 
