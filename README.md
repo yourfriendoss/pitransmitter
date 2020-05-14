@@ -58,23 +58,24 @@ This changes the permissions to allow you to run the setup
 ```
 ./PiFM/setup.sh
 ```
-This begins the installation script for the software and is a fully automated process, but also very verbose, so you can see what it is doing. Please note that your Raspberry Pi will automatically reboot after the installation is complete.
+This begins the installation script for the software and is a fully automated process, and very verbose, so you can see what is happening. Please note that your Raspberry Pi will automatically reboot after the installation is complete.
 
-**Important.** The binaries compiled for each Raspberry Pi is different. Therefore always re-compile when switching models. To do this, simply re-run the installer.
+**Important.** The binaries compiled for each Raspberry Pi is different. Therefore, always re-compile when switching models. To do this, simply re-run the installer.
 
 ## Usage
-Find the PiFM shortcut in the applications menu in the 'other' submenu.
-Use the shortcut located on the desktop.
-Open a terminal window and type `radio` and hit enter, which will directly load the application.
+* Find the PiFM shortcut in the applications menu in the 'other' submenu.
+* Use the shortcut located on the desktop.
+* Open a terminal window and type `PiFM` and hit enter.
+* For a more basic, yet still simple method, type `PiFM-basic` into a terminal and hit enter.
+Once loaded, a pop-up will appear giving you information about the software as well as the supported file types. After clicking Begin, you will be faced with a series of variables allowing you to change the properties of the FM-RDS transmission. After choosing the final option, the software will start.
 
-Once loaded, a pop-up will appear giving you information about the software as well as the supported file types. After clicking Begin you will be faced with a series of variables allowing you to change the properties of the FM-RDS transmission. After choosing the final option, the software will start.
-Included are a number of sample audio files located in the `src` directory
+Included are a number of sample audio files located in the `sounds` directory
 * `noise_22050.wav` is static sound
 * `pulses.wav` is a single pulse
 * `sound.wav` is the file for testing signal quality vs. range
 * `stereo_44100` allows you to try stereophonic audio
 
-To exit the application, make the terminal window active and click CTRL+C to force-quit the program. This will quit you to the terminal.
+If at any point you wish to close the broadcast, make the terminal window active and press CTRL and C at the same to close the program.
 
 ## Advanced Users (those confident with a terminal)
 You can also use PiFM using the terminal
