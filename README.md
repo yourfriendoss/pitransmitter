@@ -3,7 +3,9 @@ PiFM GTK 1.2
 
 
 ## What is PiFM?
-This first sections v=covers the need for PiFM GTK and why it was created. If you are only looking for the installation, skip to [Installation](#installation)
+This first sections covers the need for PiFM GTK and why it was created. If you are only looking for the installation, skip to the [installation](#installation).
+
+PiFM GTK is an extension to the already popular [PiFmAdv](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwio9Zml3rPpAhWMT8AKHY3pB3YQFjAAegQIBhAB&url=https%3A%2F%2Fgithub.com%2Fmiegl%2FPiFmAdv&usg=AOvVaw0yjOcSmzqDT7XF36NZs7zl) repository developd by Miegl. This extension features a small number of additional files that greatly assist the procedure to install and set up the software. The main focus of PiFM GTK is to allow anybody from a complete Linux or radio novice to a command-line expert or radiohead find an affordable substitute to a significantly more expensive FM transmitter which can cost thousands of times more than the Raspberry Pi. This is all controlled through an intuitive graphical interface based on the modern GTK library and means you don't have to struggle with a (for new users especially) intimidating command-line.
 
 This program generates an FM modulation, with RDS (Radio Data System) data generated in real time as well as having the ability to use both monophonic and stereophonic audio.
 
