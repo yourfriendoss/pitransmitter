@@ -3,7 +3,7 @@ PiFM GTK 1.2
 
 
 ## What is PiFM?
-This first sections covers the need for PiFM GTK and why it was created. If you are only looking for the installation, skip ahead to the [installation](#installation).
+This first sections covers the need for PiFM GTK and why it was created. If you are only looking for the installation, skip ahead to the [setup](#Prepping-the-Pi).
 
 PiFM GTK is an extension to the already popular [PiFmAdv](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwio9Zml3rPpAhWMT8AKHY3pB3YQFjAAegQIBhAB&url=https%3A%2F%2Fgithub.com%2Fmiegl%2FPiFmAdv&usg=AOvVaw0yjOcSmzqDT7XF36NZs7zl) repository developd by Miegl. This extension features a small number of additional files that greatly assist the procedure to install and set up the software. The main focus of PiFM GTK is to allow anybody from a complete Linux or radio novice to a command-line expert or radiohead find an affordable substitute to a significantly more expensive FM transmitter which can cost thousands of times more than the Raspberry Pi. This is all controlled through an intuitive graphical interface based on the modern GTK library and means you don't have to struggle with a (for new users especially) intimidating command-line.
 
@@ -24,22 +24,43 @@ This project is based on an earlier FM transmitter developed by [Oliver Mattos a
 
 PiFmAdv has been developed solely for experimentation purposes only. It is not a media center, nor is it intended to broadcast music to your stereo system. See the [legal warning](#warning-and-disclaimer).
 
-## Installation instructions
-**Equipment:**
-* Raspberry Pi (1a, 1b, 1a+, 1b+, 2b, 3b, 3a+, 3b+, Zero, Zero W are all accepted models)
+## Prepping the Pi
+**Required Equipment:**
+* Raspberry Pi (1a, 1b, 1a+, 1b+, 2b, 3b, 3a+, 3b+, Zero, Zero W are all compatible)
 * Acceptable power supply (recommended at least 2A)
 * SD Card (4gb minimum with Raspbian Desktop installed [installation guide](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/2))
-PiFM 1.2 depends on a number of prerequisites. To ensure that all of these are in place, first run the `setup.sh` script. This will perform a number of relevant commands to get the transmitter up and running.
+* Mini HDMI cable (Pi Zero or Zero W)
+* HDMI cable (Pi 1a, 1b, 1a+, 1b+, 2b, 3b, 3a+, 3b+)
+* Ethernet cable (unless it has onboard WiFi or you have a WiFi dongle)
+* USB keyboard/mouse
+* HDMI monitor/tv to display the desktop
 
-Clone or download the source repository and run `setup.sh` in the `PiFM` directory:
+**Optional Equipment:**
+* Portable display (to make it more compact and portable)
+* Portable power bank (so that you can use it wherever you are!)
+
+## Installation
+PiFM 1.2 depends on a number of prerequisites. To ensure that all of these are in place, first run the `setup.sh` script. This will perform a number of relevant commands to get the transmitter ready.
+
+1. Install Raspbian Desktop onto an SD card (click [here](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/2) for a detailed guide)
+2. Connect your peripherals to the Raspberry Pi (keyboard/mouse/SD/HDMI/etc...)
+3. Once you are ready to start, turn on the Pi and wait until the desktop environment appears.
+4. At the top left of the screen click the terminal icon and wait for the terminal window to load
+5. Once it has loaded, type in the following commands.
 ```
 git clone https://github/com/mundeeplamport/PiFM
+```
+This will download the software from this repository
+```
 chmod +x /home/pi/PiFM/setup.sh
+```
+This changes the permissions to allow you to run the setup
+```
 ./PiFM/setup.sh
 ```
-This will run the installation script for the software and is a fully automated process, but also very verbose, so you can see what it is doing. Please note that your Raspberry Pi will automatically reboot after installation is complete. **For a GUI based installation, double-click on `setup.sh`** and click "execute in terminal", this way you will have a detailed view of the installation procedure.
+This begins the installation script for the software and is a fully automated process, but also very verbose, so you can see what it is doing. Please note that your Raspberry Pi will automatically reboot after the installation is complete.
 
-**Important.** The binaries compiled for the Raspberry Pi 1 are not compatible with the Raspberry Pi 2/3, and conversely. Always re-compile when switching models. To do so, re-run the installer.
+**Important.** The binaries compiled for each Raspberry Pi is different. Therefore always re-compile when switching models. To do this, simply re-run the installer.
 
 ## Usage
 Find the PiFM shortcut in the applications menu in the 'other' submenu.
