@@ -27,7 +27,7 @@ PiFM has been developed solely for experimentation only. See the [legal warning]
 **Required Equipment:**
 * Raspberry Pi (1a, 1b, 1a+, 1b+, 2b, 3b, 3a+, 3b+, Zero, Zero W are all compatible)
 * Acceptable power supply (recommended at least 2A)
-* SD Card (4gb minimum with Raspbian Desktop installed [installation guide](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/2))
+* SD Card (4gb minimum with Raspbian Desktop installed. See [installation guide](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/2))
 * Mini HDMI cable (Pi Zero or Zero W)
 * HDMI cable (Pi 1a, 1b, 1a+, 1b+, 2b, 3b, 3a+, 3b+)
 * Ethernet cable (unless it has onboard WiFi or you have a WiFi dongle)
@@ -65,8 +65,8 @@ This begins the installation script for the software and is a fully automated pr
 ## Usage
 * Find the PiFM shortcut in the applications menu in the 'other' submenu.
 * Use the shortcut located on the desktop.
-* Open a terminal window and type `PiFM` and hit enter.
-* For a terminal based, yet still simple method, type `PiFM-basic` into a terminal and hit enter.
+* Open a terminal window and type `pifm` and hit enter.
+* For a terminal based, yet still simple method, type `pifm-basic` into a terminal and hit enter.
 Once loaded, a pop-up will appear providing information about the software as well as the supported file types. After clicking Begin, you will be faced with a series of variables allowing you to change the properties of the FM-RDS transmission. After choosing the final option, the software will start.
 
 Included are a number of sample audio files located in the `sounds` directory
