@@ -13,7 +13,7 @@ This piece of software is designed to work will all versions of the Raspberry Pi
 ## How it Works
 This program generates an FM modulation, with RDS (Radio Data System) data generated in real time as well as having the ability to use both monophonic and stereophonic audio.
 
-PiFmAdv modulates the PLLC instead of the clock divider for increased signal purity, meaning that the signal is also less noisy. This has a great impact on stereo, as it's reception is significantly better.
+PiFM modulates the PLLC instead of the clock divider for increased signal purity, meaning that the signal is also less noisy. This has a great impact on stereo, as it's reception is significantly better.
 
 For the PLLC modulation to be stable there is an additional step. Due to the low-voltage detection, the PLLC frequency can be reduced to a safe value in an attempt to restrict crashes. When this happens, the carrier freqency changes based on the GPU frequency.
 To prevent this, we can tweak the GPU freqency to match the safe frequency. Now when due the low voltage detection occurs, the PLLC frequency changes to safe value, meaning nothing happens since the normal value and safe value are identical.
