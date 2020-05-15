@@ -48,9 +48,9 @@ cd /usr/bin
 sudo cp lxterminal xterm
 clear
 echo "Assigning permissions" ; sleep 0.1
-sudo chmod 777 /home/pi/PiFM/pifm.sh
-sudo chmod 777 /usr/local/bin/pifm.sh
-sudo chmod 777 /usr/local/bin/pifm-basic.sh
+sudo chmod +x /home/pi/PiFM/pifm
+sudo chmod +x /usr/local/bin/pifm
+sudo chmod +x /usr/local/bin/pifm-basic
 clear
 echo "Completed" ; sleep 2
 clear
