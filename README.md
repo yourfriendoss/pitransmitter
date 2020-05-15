@@ -38,6 +38,7 @@ PiFM has been developed solely for experimentation only. See the [legal warning]
 * Portable display (to make it more compact and portable)
 * Portable power bank (so that you can use it on the go)
 * USB drive (to store your .wav and .ogg audio files)
+* Piece of wire to act as an antenna (GPIO 4)
 
 ## Installation
 PiFM 1.2.1 depends on a number of prerequisites. These are required. to get the transmitter ready.
