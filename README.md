@@ -36,7 +36,7 @@ PiFM has been developed solely for experimentation only. See the [legal warning]
 
 **Optional Equipment:**
 * Portable display (to make it more compact and portable)
-* Portable power bank (so that you can use it wherever you are!)
+* Portable power bank (so that you can use it on the go)
 * USB drive (to store your .wav and .ogg audio files)
 
 ## Installation
