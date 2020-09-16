@@ -8,7 +8,7 @@ This first sections covers the need for PiFM GTK and why it was created. If you 
 PiFM GTK is an extension to the already popular [PiFmAdv](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=2ahUKEwio9Zml3rPpAhWMT8AKHY3pB3YQFjAAegQIBhAB&url=https%3A%2F%2Fgithub.com%2Fmiegl%2FPiFmAdv&usg=AOvVaw0yjOcSmzqDT7XF36NZs7zl) repository developd by Miegl. This extension features a small number of additional files that greatly assist the procedure to install and set up the software. The main focus of PiFM GTK is to allow anybody from a complete Linux or radio novice to a command-line expert or radiohead find an affordable substitute to a significantly more expensive FM transmitter which can cost thousands of times more than the Raspberry Pi. This is all controlled through an intuitive graphical interface based on the modern GTK library and means you don't have to struggle with a (for new users especially) intimidating command-line.
 
 ## Compatibility
-This piece of software is designed to work will all versions of the Raspberry Pi including the Raspberry Pi 4b! The installation is designed to be done on Raspbian, which is the Official Raspberry Pi Operating System. It is guaranteed to work on any version from August 2015 and later, as the installer is automatically designed to check that all dependencies are present (previous versions do not have the `rpi-mailbox` driver), however it is recommended to use a fresh install to reduce the likelihood of any errors.
+This piece of software is designed to work will all versions of the Raspberry Pi including the Raspberry Pi 4b! The installation is designed to be done on Raspberry Pi OS, which is the Official Raspberry Pi Operating System. It is guaranteed to work on any version from August 2015 and later, as the installer is automatically designed to check that all dependencies are present (previous versions do not have the `rpi-mailbox` driver), however it is recommended to use a fresh install to reduce the likelihood of any errors.
 
 ## How it Works
 This program generates an FM modulation, with RDS (Radio Data System) data generated in real time as well as having the ability to use both monophonic and stereophonic audio.
@@ -27,7 +27,7 @@ PiFM has been developed solely for experimentation only. See the [legal warning]
 **Required Equipment:**
 * Raspberry Pi (1a, 1b, 1a+, 1b+, 2b, 3b, 3a+, 3b+, 4b, Zero, Zero W are all compatible)
 * Acceptable power supply (recommended at least 2A)
-* SD Card (4gb minimum with Raspbian Desktop installed. See [installation guide](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/2))
+* SD Card (4gb minimum with Raspberry Pi OS Desktop installed. See [installation guide](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/2))
 * Mini HDMI cable (Pi Zero or Zero W)
 * HDMI cable (Pi 1a, 1b, 1a+, 1b+, 2b, 3b, 3a+, 3b+, 4b)
 * Ethernet cable (unless it has onboard WiFi or you have a WiFi dongle)
@@ -43,9 +43,9 @@ PiFM has been developed solely for experimentation only. See the [legal warning]
 ## Installation
 PiFM 1.2.1 depends on a number of prerequisites. These are required. to get the transmitter ready.
 
-1. Install Raspbian Desktop onto an SD card (click [here](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/2) for a detailed guide)
+1. Install Raspberry Pi OS Desktop onto an SD card (click [here](https://projects.raspberrypi.org/en/projects/raspberry-pi-setting-up/2) for a detailed guide)
 2. Connect your peripherals to the Raspberry Pi (keyboard/mouse/SD/HDMI/etc...)
-3. Once you are ready to start, turn on the Pi and wait until the desktop environment appears.
+3. Once you are ready to start, turn on the Pi and wait until the desktop environment appears, before connecting to a network.
 4. At the top left of the screen click the terminal icon and wait for the terminal window to load
 5. Once it has loaded, type in the following commands.
 
