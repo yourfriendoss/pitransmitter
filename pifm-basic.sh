@@ -23,9 +23,9 @@ sleep 5
 clear
 echo "Welcome to PiFM. An FM-RDS capable transmitter."
 sleep 0.5
-echo "This is a quick way to easily set up PiFM"
+echo "This is a quick PiFM setup script"
 sleep 0.5
-echo "and is designed to make the process of using Pi FM considerably easier."
+echo "and is designed to make the process of using PiFM considerably easier."
 sleep 0.5
 echo "allowing you to start transmitting with just a few bits of key, user-customizable information"
 sleep 5
@@ -40,11 +40,11 @@ echo "Choose a Program Service name (max. 8 characters)"
 read ps
 clear
 # Choose Radio Text
-echo "Choose Radio Text"
+echo "Choose Radio Text (max. 64 characters)"
 read rt
 clear
 # Choose Audio File
-echo "Which audio file should be transmitted? (include extension .wav .ogg)"
+echo "Which audio file should be transmitted? (file path with extension .wav .ogg)"
 read audio
 clear
 # Choose PI-Code
@@ -110,7 +110,7 @@ echo -ne '[]################### []      (95%)\r'
 sleep 0.1
 echo -ne '[]####################[]      (100%)\r'
 sleep 1
-echo -ne 'Completed. Starting service Pi FM.  \r'
+echo -ne 'Completed. Starting service PiFM.  \r'
 echo -ne '\n'
 cd /home/pi/PiFM/src
 sudo ./pifm --freq $frequency --ps $ps --rt "$rt" --audio $audio --pi $pi --pty $pty --mpx $mpx --power $power --preemph $pre
