@@ -3,7 +3,7 @@
 # This is a setup script for the Pi FM RDS Transmitter project streamlined by Mundeep Lamport
 clear
 echo "Welcome to the PiFM installer. This script will help you get up and running."
-echo "PiFM currently supports: Pi 1, 2, 3, Zero. The 4 is not yet supported."
+echo "PiFM currently supports: Pi 1, 2, 3, Zero. The 4 uses a different setup script."
 echo "For more information, visit https://github.com/mundeeplamport"
 echo "WARNING! Your system will reboot once completed."
 sleep 10
@@ -12,7 +12,7 @@ echo "Updating repository" ; sleep 1
 sudo apt-get update
 echo " "
 echo "Installing required tools" ; sleep 1
-sudo apt-get install libsndfile1-dev zenity git -y
+sudo apt-get install libsndfile1-dev zenity -y
 clear
 echo "Changing directory --> src" ; sleep 1
 cd /home/pi/PiFM/src
