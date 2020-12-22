@@ -51,7 +51,11 @@ PiFM 1.2.1 depends on a number of prerequisites. These are required. to get the 
 
 **Pi 4 Installation**
 ```
-git clone https://github/com/mundeeplamport/PiFM
+sudo apt-get install git -y
+```
+This will install git, which allows you to download files from Github
+```
+git clone https://github.com/mundeeplamport/PiFM
 ```
 This will download the software from this repository
 ```
@@ -63,7 +67,11 @@ This changes the permissions to allow you to run the setup
 ```
 **Previous Pi Versions**
 ```
-git clone https://github/com/mundeeplamport/PiFM
+sudo apt-get install git -y
+```
+This will install git, which allows you to download files from Github
+```
+git clone https://github.com/mundeeplamport/PiFM
 ```
 This will download the software from this repository
 ```
