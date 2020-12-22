@@ -6,5 +6,5 @@ GenericName=Transmitter
 Icon=/home/pi/PiFM/src/PiFM.png
 Terminal=true
 Type=Application
-Exec= /home/pi/PiFM/radio.sh
+Exec= /home/pi/PiFM/pifm.sh
 
