@@ -55,7 +55,7 @@ sudo apt-get install git -y
 ```
 This will install git, which allows you to download files from Github
 ```
-git clone https://github.com/mundeeplamport/PiFM
+git clone https://github.com/mundeepl/PiFM
 ```
 This will download the software from this repository
 ```
@@ -71,7 +71,7 @@ sudo apt-get install git -y
 ```
 This will install git, which allows you to download files from Github
 ```
-git clone https://github.com/mundeeplamport/PiFM
+git clone https://github.com/mundeepl/PiFM
 ```
 This will download the software from this repository
 ```
