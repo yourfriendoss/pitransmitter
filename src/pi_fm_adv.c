@@ -31,9 +31,9 @@
 typedef struct
 {
 	float freq;
-	const char* audio;
-	const char*  station;
-	const char*  radiotext;
+	char* audio;
+	char*  station;
+	char*  radiotext;
 	int program_type;
 	int power;
 	int pin;
@@ -678,19 +678,19 @@ static int iniParser(void* user, const char* section, const char* name,
         return 0;  /* unknown section/name, error */
     }
     return 1;
-				   }
+}
 int main(int argc, char **argv) {
-	int opt;
 	INIConfig config;
+	int opt;
 
-	const char *audio_file = NULL;
-	const char *control_pipe = NULL;
+	char *audio_file = NULL;
+	char *control_pipe = NULL;
 	uint32_t carrier_freq = 87600000;
     	int rds = 1;
 	int alternative_freq[100] = {};
 	int af_size = 0;
-	const char *ps = "PiFmAdv";
-	const char *rt = "PiFmAdv: Advanced FM transmitter for the Raspberry Pi";
+	char *ps = "PiFmAdv";
+	char *rt = "PiFmAdv: Advanced FM transmitter for the Raspberry Pi";
 	uint16_t pi = 0x1234;
 	float ppm = 0;
 	float deviation = 50;
@@ -704,8 +704,7 @@ int main(int argc, char **argv) {
 	float mpx = 40;
 	int wait = 1;
 	int srate = 0;
-	int nochan = 0;	
-
+	int nochan = 0;
 
 	const char    	*short_opt = "a:f:d:p:c:P:D:m:w:W:C:h";
 	struct option   long_opt[] =
@@ -866,7 +865,7 @@ int main(int argc, char **argv) {
 		}
 	}
 
-    if( access( "config.ini", F_OK ) != -1) {
+if( access( "config.ini", F_OK ) != -1) {
 		if(ini_parse("config.ini", iniParser, &config) < 0) {
 			printf("Couldn't parse config!\n");
 		}
@@ -881,9 +880,8 @@ int main(int argc, char **argv) {
 		rt = config.radiotext;
 		ps = config.station;		
     }
-
+	
 	alternative_freq[0] = af_size;
-
 
 	double xtal_freq_recip=1.0/CLOCK_BASE;
 	int divider, best_divider = 0;
