@@ -21,16 +21,9 @@ else
 	TARGET = other
 endif
 
-ifneq ($(TARGET), other)
-
 app: rds.o waveforms.o pi_fm_adv.o fm_mpx.o control_pipe.o mailbox.o ini.o
 	$(CC) -o pi_fm_adv rds.o waveforms.o mailbox.o pi_fm_adv.o fm_mpx.o control_pipe.o ini.o -lm -lsndfile
 
-endif
-
-
-rds_wav: rds.o waveforms.o rds_wav.o fm_mpx.o
-	$(CC) -o rds_wav rds_wav.o rds.o waveforms.o fm_mpx.o -lm -lsndfile
 
 rds.o: rds.c waveforms.h
 	$(CC) $(CFLAGS) rds.c
