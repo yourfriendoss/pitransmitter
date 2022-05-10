@@ -22,10 +22,22 @@
 #include <sndfile.h>
 #include <getopt.h>
 
+#include "ini.h"
 #include "rds.h"
 #include "fm_mpx.h"
 #include "control_pipe.h"
 #include "mailbox.h"
+
+typedef struct
+{
+	float freq;
+	char* audio;
+	char station[8];
+	char radiotext[64];
+	int program_type;
+	int power;
+	int pin;
+} INIConfig;
 
 #define MBFILE                          DEVICE_FILE_NAME // From mailbox.h
 
@@ -642,8 +654,13 @@ int tx(uint32_t carrier_freq, int divider, char *audio_file, int rds, uint16_t p
 	return 0;
 }
 
+static int iniParser(void* user, const char* section, const char* name,
+                   const char* value) {
+
+				   }
 int main(int argc, char **argv) {
 	int opt;
+	INIConfig config;
 
 	char *audio_file = NULL;
 	char *control_pipe = NULL;
@@ -666,7 +683,8 @@ int main(int argc, char **argv) {
 	float mpx = 40;
 	int wait = 1;
 	int srate = 0;
-	int nochan = 0;
+	int nochan = 0;	
+
 
 	const char    	*short_opt = "a:f:d:p:c:P:D:m:w:W:C:h";
 	struct option   long_opt[] =
@@ -829,6 +847,7 @@ int main(int argc, char **argv) {
 
 	alternative_freq[0] = af_size;
 
+
 	double xtal_freq_recip=1.0/CLOCK_BASE;
 	int divider, best_divider = 0;
 	int min_int_multiplier, max_int_multiplier;
@@ -871,6 +890,21 @@ int main(int argc, char **argv) {
 	else if(!solution_count & !best_divider) {
 		fatal("No tuning solution found. You can specify the divider manually by setting the -div parameter.\n");
 	}
+
+    if( access( "config.ini", F_OK ) != -1) {
+		if(ini_parse("config.ini", iniParser, &config) < 0) {
+			printf("Couldn't parse config!\n");
+		}
+		printf("Parsed available config file!\n");
+
+		audio_file = config.audio;
+		carrier_freq = config.freq;
+		gpio = config.pin;
+		power = config.power;
+		pty = config.program_type;
+		rt = config.radiotext;
+		ps = config.station;
+    }
 
 	printf("Carrier: %3.2f Mhz, VCO: %4.1f MHz, Multiplier: %f, Divider: %d\n", carrier_freq/1e6, (double)carrier_freq * best_divider / 1e6, carrier_freq * best_divider * xtal_freq_recip, best_divider);
 	
