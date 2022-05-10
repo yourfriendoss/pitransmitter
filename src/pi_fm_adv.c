@@ -672,7 +672,7 @@ static int iniParser(void* user, const char* section, const char* name,
         pconfig->program_type = atoi(value);
     } else if (MATCH("config", "radiotext")) {
         pconfig->radiotext = strdup(value);
-    }  else if (MATCH("config", "radiotestationxt")) {
+    }  else if (MATCH("config", "station")) {
         pconfig->station = strdup(value);
     } else {
         return 0;  /* unknown section/name, error */
