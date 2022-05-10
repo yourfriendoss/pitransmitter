@@ -31,9 +31,9 @@
 typedef struct
 {
 	float freq;
-	char* audio;
-	char station[8];
-	char radiotext[64];
+	const char* audio;
+	const char*  station;
+	const char*  radiotext;
 	int program_type;
 	int power;
 	int pin;
@@ -656,7 +656,27 @@ int tx(uint32_t carrier_freq, int divider, char *audio_file, int rds, uint16_t p
 
 static int iniParser(void* user, const char* section, const char* name,
                    const char* value) {
+    INIConfig* pconfig = (INIConfig*)user;
 
+    #define MATCH(s, n) strcmp(section, s) == 0 && strcmp(name, n) == 0
+    if (MATCH("config", "audio")) {
+        pconfig->audio = strdup(value);
+    } if (MATCH("config", "freq")) {
+        pconfig->freq = atof(value);
+    } if (MATCH("config", "pin")) {
+        pconfig->pin = atoi(value);
+    } if (MATCH("config", "power")) {
+        pconfig->power = atoi(value);
+    } if (MATCH("config", "program_type")) {
+        pconfig->program_type = atoi(value);
+    } if (MATCH("config", "radiotext")) {
+        pconfig->radiotext = strdup(value);
+    } if (MATCH("config", "pty")) {
+        pconfig->station = strdup(value);
+    }  else {
+        return 0;  /* unknown section/name, error */
+    }
+    return 1;
 				   }
 int main(int argc, char **argv) {
 	int opt;
@@ -895,15 +915,17 @@ int main(int argc, char **argv) {
 		if(ini_parse("config.ini", iniParser, &config) < 0) {
 			printf("Couldn't parse config!\n");
 		}
+
 		printf("Parsed available config file!\n");
 
-		audio_file = config.audio;
+		audio_file = (char *)config.audio;
 		carrier_freq = config.freq;
 		gpio = config.pin;
 		power = config.power;
 		pty = config.program_type;
-		rt = config.radiotext;
-		ps = config.station;
+		rt = (char *)config.radiotext;
+		ps = (char *)config.station;
+		
     }
 
 	printf("Carrier: %3.2f Mhz, VCO: %4.1f MHz, Multiplier: %f, Divider: %d\n", carrier_freq/1e6, (double)carrier_freq * best_divider / 1e6, carrier_freq * best_divider * xtal_freq_recip, best_divider);
