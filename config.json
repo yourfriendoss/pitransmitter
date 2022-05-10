@@ -4,5 +4,6 @@
     "rt": "yourfriend.lv",
     "pty": 10, 
     "pw": 7,
-    "pin": 4
+    "pin": 4,
+    "audio": "audio.ogg"
 }
