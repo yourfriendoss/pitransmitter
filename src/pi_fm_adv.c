@@ -659,21 +659,22 @@ static int iniParser(void* user, const char* section, const char* name,
     INIConfig* pconfig = (INIConfig*)user;
 
     #define MATCH(s, n) strcmp(section, s) == 0 && strcmp(name, n) == 0
+
     if (MATCH("config", "audio")) {
         pconfig->audio = strdup(value);
-    } if (MATCH("config", "freq")) {
+    } else if (MATCH("config", "freq")) {
         pconfig->freq = atof(value);
-    } if (MATCH("config", "pin")) {
+    } else if (MATCH("config", "pin")) {
         pconfig->pin = atoi(value);
-    } if (MATCH("config", "power")) {
+    } else if (MATCH("config", "power")) {
         pconfig->power = atoi(value);
-    } if (MATCH("config", "program_type")) {
+    } else if (MATCH("config", "program_type")) {
         pconfig->program_type = atoi(value);
-    } if (MATCH("config", "radiotext")) {
+    } else if (MATCH("config", "radiotext")) {
         pconfig->radiotext = strdup(value);
-    } if (MATCH("config", "pty")) {
+    }  else if (MATCH("config", "radiotestationxt")) {
         pconfig->station = strdup(value);
-    }  else {
+    } else {
         return 0;  /* unknown section/name, error */
     }
     return 1;
@@ -682,14 +683,14 @@ int main(int argc, char **argv) {
 	int opt;
 	INIConfig config;
 
-	char *audio_file = NULL;
-	char *control_pipe = NULL;
+	const char *audio_file = NULL;
+	const char *control_pipe = NULL;
 	uint32_t carrier_freq = 87600000;
     	int rds = 1;
 	int alternative_freq[100] = {};
 	int af_size = 0;
-	char *ps = "PiFmAdv";
-	char *rt = "PiFmAdv: Advanced FM transmitter for the Raspberry Pi";
+	const char *ps = "PiFmAdv";
+	const char *rt = "PiFmAdv: Advanced FM transmitter for the Raspberry Pi";
 	uint16_t pi = 0x1234;
 	float ppm = 0;
 	float deviation = 50;
@@ -865,6 +866,22 @@ int main(int argc, char **argv) {
 		}
 	}
 
+    if( access( "config.ini", F_OK ) != -1) {
+		if(ini_parse("config.ini", iniParser, &config) < 0) {
+			printf("Couldn't parse config!\n");
+		}
+
+		printf("Parsed available config file!\n");
+
+		audio_file = config.audio;
+		carrier_freq = 1e6 * config.freq;
+		gpio = config.pin;
+		power = config.power;
+		pty = config.program_type;
+		rt = config.radiotext;
+		ps = config.station;		
+    }
+
 	alternative_freq[0] = af_size;
 
 
@@ -910,23 +927,6 @@ int main(int argc, char **argv) {
 	else if(!solution_count & !best_divider) {
 		fatal("No tuning solution found. You can specify the divider manually by setting the -div parameter.\n");
 	}
-
-    if( access( "config.ini", F_OK ) != -1) {
-		if(ini_parse("config.ini", iniParser, &config) < 0) {
-			printf("Couldn't parse config!\n");
-		}
-
-		printf("Parsed available config file!\n");
-
-		audio_file = (char *)config.audio;
-		carrier_freq = config.freq;
-		gpio = config.pin;
-		power = config.power;
-		pty = config.program_type;
-		rt = (char *)config.radiotext;
-		ps = (char *)config.station;
-		
-    }
 
 	printf("Carrier: %3.2f Mhz, VCO: %4.1f MHz, Multiplier: %f, Divider: %d\n", carrier_freq/1e6, (double)carrier_freq * best_divider / 1e6, carrier_freq * best_divider * xtal_freq_recip, best_divider);
 	
