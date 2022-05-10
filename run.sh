@@ -13,4 +13,4 @@ make
 
 cd ..
 
-./src/pi_fm_adv --freq $freq --ps $ps --rt $rt --pty $pty --audio $audio
+sudo ./src/pi_fm_adv --freq $freq --ps $ps --rt $rt --pty $pty --audio $audio
