@@ -51,7 +51,16 @@
 #define CLOCK_BASE			54.0e6
 #define DMA_CHANNEL			6
 #else
-#error Unknown Raspberry Pi version (variable RASPI)
+
+// THIS IS NOT GOOD!! these values WILL NOT WORK
+// we need them for compilation on non-RPI devices though
+
+#define PERIPH_VIRT_BASE                0xfe000000
+#define PERIPH_PHYS_BASE                0x7e000000
+#define DRAM_PHYS_BASE                  0xc0000000
+#define MEM_FLAG                        0x04
+#define CLOCK_BASE			54.0e6
+#define DMA_CHANNEL			6
 #endif
 
 #define DMA_BASE_OFFSET                 0x00007000
