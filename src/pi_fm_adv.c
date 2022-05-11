@@ -22,10 +22,22 @@
 #include <sndfile.h>
 #include <getopt.h>
 
+#include "ini.h"
 #include "rds.h"
 #include "fm_mpx.h"
 #include "control_pipe.h"
 #include "mailbox.h"
+
+typedef struct
+{
+	float freq;
+	char* audio;
+	char*  station;
+	char*  radiotext;
+	int program_type;
+	int power;
+	int pin;
+} INIConfig;
 
 #define MBFILE                          DEVICE_FILE_NAME // From mailbox.h
 
@@ -51,7 +63,16 @@
 #define CLOCK_BASE			54.0e6
 #define DMA_CHANNEL			6
 #else
-#error Unknown Raspberry Pi version (variable RASPI)
+
+// THIS IS NOT GOOD!! these values WILL NOT WORK
+// we need them for compilation on non-RPI devices though
+
+#define PERIPH_VIRT_BASE                0xfe000000
+#define PERIPH_PHYS_BASE                0x7e000000
+#define DRAM_PHYS_BASE                  0xc0000000
+#define MEM_FLAG                        0x04
+#define CLOCK_BASE			54.0e6
+#define DMA_CHANNEL			6
 #endif
 
 #define DMA_BASE_OFFSET                 0x00007000
@@ -633,7 +654,33 @@ int tx(uint32_t carrier_freq, int divider, char *audio_file, int rds, uint16_t p
 	return 0;
 }
 
+static int iniParser(void* user, const char* section, const char* name,
+                   const char* value) {
+    INIConfig* pconfig = (INIConfig*)user;
+
+    #define MATCH(s, n) strcmp(section, s) == 0 && strcmp(name, n) == 0
+
+    if (MATCH("config", "audio")) {
+        pconfig->audio = strdup(value);
+    } else if (MATCH("config", "freq")) {
+        pconfig->freq = atof(value);
+    } else if (MATCH("config", "pin")) {
+        pconfig->pin = atoi(value);
+    } else if (MATCH("config", "power")) {
+        pconfig->power = atoi(value);
+    } else if (MATCH("config", "program_type")) {
+        pconfig->program_type = atoi(value);
+    } else if (MATCH("config", "radiotext")) {
+        pconfig->radiotext = strdup(value);
+    }  else if (MATCH("config", "station")) {
+        pconfig->station = strdup(value);
+    } else {
+        return 0;  /* unknown section/name, error */
+    }
+    return 1;
+}
 int main(int argc, char **argv) {
+	INIConfig config;
 	int opt;
 
 	char *audio_file = NULL;
@@ -818,6 +865,22 @@ int main(int argc, char **argv) {
 		}
 	}
 
+if( access( "config.ini", F_OK ) != -1) {
+		if(ini_parse("config.ini", iniParser, &config) < 0) {
+			printf("Couldn't parse config!\n");
+		}
+
+		printf("Parsed available config file!\n");
+
+		audio_file = config.audio;
+		carrier_freq = 1e6 * config.freq;
+		gpio = config.pin;
+		power = config.power;
+		pty = config.program_type;
+		rt = config.radiotext;
+		ps = config.station;		
+    }
+	
 	alternative_freq[0] = af_size;
 
 	double xtal_freq_recip=1.0/CLOCK_BASE;
